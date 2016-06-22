@@ -6,7 +6,7 @@ import {Component} from '@angular/core';
         '<div class="flex-container">' +
         // item 1
         '<div class="flex-item">' +
-            '<textarea id="chat-message" class="chat-message"></textarea>' +
+            '<textarea class="chat-message" #textarea (keyup)="message=textarea.value">{{message}}</textarea>' +
             '<br>' +
             '<button class="send" (click)=send()>Send</button>' +
         '</div>' +
@@ -19,26 +19,27 @@ import {Component} from '@angular/core';
             '<p>Choose a chat room</p>' +
             '<div class="rooms"><table>' +
                 '<tr>' +
-                    '<td><button (click)="selectRoom(1)">1</button></td>' +
-                    '<td><button (click)="selectRoom(2)">2</button></td>' +
-                    '<td><button (click)="selectRoom(3)">3</button></td>' +
-                    '<td><button (click)="selectRoom(4)">4</button></td>' +
-                    '<td><button (click)="selectRoom(5)">5</button></td>' +
-                    '<td><button (click)="selectRoom(6)">6</button></td>' +
-                    '<td><button (click)="selectRoom(7)">7</button></td>' +
-                    '<td><button (click)="selectRoom(8)">8</button></td>' +
-                    '<td><button (click)="selectRoom(9)">9</button></td>' +
-                    '<td><button (click)="selectRoom(10)">10</button></td>' +
+                    '<td><button #b1 value="1" (click)="room=b1.value">1</button></td>' +
+                    '<td><button #b2 value="2" (click)="room=b2.value">2</button></td>' +
+                    '<td><button #b3 value="3" (click)="room=b3.value">3</button></td>' +
+                    '<td><button #b4 value="4" (click)="room=b4.value">4</button></td>' +
+                    '<td><button #b5 value="5" (click)="room=b5.value">5</button></td>' +
+                    '<td><button #b6 value="6" (click)="room=b6.value">6</button></td>' +
+                    '<td><button #b7 value="7" (click)="room=b7.value">7</button></td>' +
+                    '<td><button #b8 value="8" (click)="room=b8.value">8</button></td>' +
+                    '<td><button #b9 value="9" (click)="room=b9.value">9</button></td>' +
+                    '<td><button #b10 value="10" (click)="room=b10.value">10</button></td>' +
                 '</tr>' +
             '</table></div>' +
             '<p>Your room is : {{room}}</p>' +
             '<p>Take a name for the chat : ' +
-                '<input #box value="Florian" placeholder="Set your name" (keyup)="name=box.value"><' +
-            '/p>' +
+                '<input #box value="Florian" placeholder="Set your name" (keyup)="name=box.value">' +
+            '</p>' +
             '<p>Your name is : {{name}}</p>' +
             '<button class="co" (click)="connection()">Connection</button>' +
             '<button class="co" (click)="deconnection()">Deconnection</button>' +
             '<p>State of the connection : {{state}}</p>' +
+            '<button (click)="showVariable()">showVariable</button>' +
         '</div>' +
 
 
@@ -49,11 +50,14 @@ export class AppComponent {
     room:string="3";
     name:string="Florian";
     state:string="Opened";
+    message:string="";
 
-    selectRoom(x){
-        this.room = x;
+    showVariable(){
+        console.log(this.room);
+        console.log(this.name);
+        console.log(this.state);
+        console.log(this.message);
     }
-
     connection(){
         this.state="Opened";
     }
@@ -65,21 +69,22 @@ export class AppComponent {
 
     send(){
         console.log("send()");
-        var message = document.getElementById("chat-message");
-        console.log(message);
-        console.log(message.innerHTML);
-        console.log(message.innerText);
-        console.log(message.value);
-        if(this.room!="" && this.name!="" && this.state=="Opened" && message.value!=""){
-            document.getElementById("chat-receipt").innerHTML += "<li>" + this.name + " : " + message.value +"</li>";
-            message.value="";
+        if(this.room!="" && this.name!="" && this.state=="Opened" && this.message!=""){
+            document.getElementById("chat-receipt").innerHTML += "<li>" + this.name + " : " + this.message +"</li>";
+            this.message="";
+            /**
+             * Problème :
+             *
+             * Malgré la réinitialisation de this.message,
+             * le textarea n'efface pas son contenu ...
+             * */
         }else if(this.room==""){
             console.log("In which room should we display the message ?");
         }else if(this.name==""){
             console.log("A boy has no name !");
         }else if(this.state=="Closed"){
             console.log("The connection is closed !");
-        }else if(message.value==""){
+        }else if(this.message==""){
             console.log("There is any message !");
         }
     }
