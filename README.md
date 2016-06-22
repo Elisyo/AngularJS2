@@ -1,9 +1,11 @@
-# Angular 2 QuickStart Source
+# Angular 2 QuickStart Source + Chat in Angular 2
 
 This repository holds the TypeScript source code of the [angular.io quickstart](https://angular.io/docs/ts/latest/quickstart.html),
 the foundation for most of the documentation samples and potentially a good starting point for your application.
 
 It's been extended with testing support so you can start writing tests immediately.
+
+It's been improved by Elisyo. It will give you a simple chat (server and) client.
 
 **This is not the perfect arrangement for your application. It is not designed for production. 
 It exists primarily to get you started quickly with learning and prototyping in Angular 2**
@@ -24,15 +26,15 @@ Older versions produce errors.
 
 We recommend [nvm](https://github.com/creationix/nvm) for managing multiple versions of node and npm.
 
-## Create a new project based on the QuickStart
+## Create a new project based on the QuickStart, and improved by me : Elisyo
 
 Clone this repo into new project folder (e.g., `my-proj`).
 ```bash
-git clone  https://github.com/angular/quickstart  my-proj
+git clone  https://github.com/Elisyo/AngularJS2.git  my-proj
 cd my-proj
 ```
 
-We have no intention of updating the source on `angular/quickstart`.
+We have no intention of updating the source on `Elisyo/AngularJS2`.
 Discard everything "git-like" by deleting the `.git` folder.
 ```bash
 rm -rf .git  // non-Windows
