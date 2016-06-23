@@ -157,3 +157,7 @@ A custom reporter (see `protractor.config.js`) generates a  `./protractor-result
 which is easier to read; this file is excluded from source control.
 
 Shut it down manually with Ctrl-C.
+
+### Using WebSockets for the chat
+I tried to use [angular2-websocket](https://github.com/afrad/angular2-websocket) from its github.
+Unfortunately, all the docs about websockets converged on it. I don't know why, but the import of angular2-websocket doesn't work for me.
